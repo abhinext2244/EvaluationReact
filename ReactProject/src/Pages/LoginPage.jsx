@@ -13,6 +13,7 @@ export default function LoginPage(){
         async function handleLogin(){
             let res=await axios({
                 method:'post',
+                url:"https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/login"
                 data:{
                     email,
                     password
