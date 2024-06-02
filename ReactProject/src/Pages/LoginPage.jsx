@@ -10,18 +10,24 @@ export default function LoginPage(){
         inputRef.current.focus()
     },[])
    const {AuthDetails,Login}=useContext(Logincontext)
-        async function handleLogin(){
-            let res=await axios({
-                method:'post',
-                url:"https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/login"
-                data:{
-                    email,
-                    password
-                }
-            })
-            console.log(res.data)
+          async function handleLogin(){
+            try {
+                let res=await axios({
+                    method:'post',
+                    url:"https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/login",
+                    data:{
+                        email,
+                        password
+                    },
+                });
+                Login(res.data.token)
+            } catch (error) {
+                console.log(error)
+            }
          }
-    
+    if(AuthDetails.isLoggined){
+        return <Navigate to="/HomePage"/>
+    }
     return(
         <Stack spacing={7}>
         <VStack >
